@@ -45,6 +45,8 @@ public class MedicoController {
 
         // Atualiza com as informações que vem do DTO
         medico.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }
 
     @DeleteMapping("/{id}")
