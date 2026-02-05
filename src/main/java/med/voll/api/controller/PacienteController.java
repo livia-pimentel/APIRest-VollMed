@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -22,9 +23,15 @@ public class PacienteController {
     // Metodo
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados) {
+    public ResponseEntity cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados, UriComponentsBuilder uriBuilder) {
 //        System.out.println(dados);
-        pacienteRepository.save(new Paciente(dados));
+        var paciente = new Paciente(dados);
+        pacienteRepository.save(paciente);
+
+        // O Spring gerencia a URI com a classe UriComponentsBuilder
+        var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(paciente));
     }
 
     @GetMapping
