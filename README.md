@@ -29,7 +29,7 @@ A API fornece um CRUD completo para as seguintes entidades:
 * **Atualização:** Edição de dados específicos (nome, telefone, endereço).
 * **Exclusão Lógica:** Mantém o histórico no banco, mas inativa o registro para a API.
 
-### 👩‍target Pacientes
+### 👩‍Pacientes
 * **Cadastro:** Controle de CPF e dados de contato.
 * **Listagem:** Exibição detalhada dos pacientes ativos.
 * **Atualização:** Manutenção de endereços e contatos.
