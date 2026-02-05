@@ -43,4 +43,11 @@ public class MedicoController {
         // Atualiza com as informações que vem do DTO
         medico.atualizarInformacoes(dados);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        // Dessa forma excluí mesmo o registro do banco de dados
+        repository.deleteById(id);
+    }
 }
