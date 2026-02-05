@@ -43,4 +43,4 @@ Para rodar o projeto localmente, siga estes passos:
 
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/livia-pimentel/APIRest-VollMed.git](https://github.com/livia-pimentel/APIRest-VollMed.git)
+   git clone https://github.com/livia-pimentel/APIRest-VollMed.git
