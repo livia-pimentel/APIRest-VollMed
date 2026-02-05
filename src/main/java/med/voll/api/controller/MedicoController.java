@@ -24,20 +24,20 @@ public class MedicoController {
     // Metodo
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroMedico dados) {
 //        System.out.println(dados);
         repository.save(new Medico(dados));
     }
 
     @GetMapping
-    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemMedico>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         return repository.findAllByAtivoTrue(paginacao)
                 .map(DadosListagemMedico::new);
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados) {
         // Carregar o objeto do banco de dados
         var medico = repository.getReferenceById(dados.id());
 

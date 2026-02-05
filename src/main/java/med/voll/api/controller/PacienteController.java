@@ -21,20 +21,20 @@ public class PacienteController {
     // Metodo
     @PostMapping
     @Transactional
-    public void cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados) {
+    public ResponseEntity cadastrarPaciente(@RequestBody @Valid DadosCadastroPaciente dados) {
 //        System.out.println(dados);
         pacienteRepository.save(new Paciente(dados));
     }
 
     @GetMapping
-    public Page<DadosListagemPaciente> listarPaciente(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
+    public ResponseEntity<Page<DadosListagemPaciente>> listarPaciente(@PageableDefault(size = 10, sort = {"nome"})Pageable paginacao) {
         return pacienteRepository.findAllByAtivoTrue(paginacao)
                 .map(DadosListagemPaciente::new);
     }
 
     @PutMapping
     @Transactional
-    public void atualizarPaciente(@RequestBody @Valid DadosAtualizarPaciente dados) {
+    public ResponseEntity atualizarPaciente(@RequestBody @Valid DadosAtualizarPaciente dados) {
         var paciente = pacienteRepository.getReferenceById(dados.id());
 
         paciente.atualizarInformacoes(dados);
