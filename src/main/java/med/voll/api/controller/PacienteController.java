@@ -39,4 +39,14 @@ public class PacienteController {
         paciente.atualizarInformacoes(dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluirPaciente(@PathVariable Long id) {
+        // Recupera a informação do paciente no banco
+        var paciente = pacienteRepository.getReferenceById(id);
+
+        // Configura para deixar paciente inativo
+        paciente.excluirPaciente();
+    }
+
 }

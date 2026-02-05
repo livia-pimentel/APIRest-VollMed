@@ -53,4 +53,9 @@ public class Paciente {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
     }
+
+    // Deixa status de ativo em inativo
+    public void excluirPaciente() {
+        this.ativo = false;
+    }
 }
