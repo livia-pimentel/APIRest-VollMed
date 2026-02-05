@@ -64,4 +64,12 @@ public class PacienteController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public  ResponseEntity detalharPaciente(@PathVariable Long id) {
+
+        // Recupera o paciente no banco de dados
+        var paciente = pacienteRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
 }
