@@ -48,6 +48,13 @@ public class MedicoController {
     @Transactional
     public void excluir(@PathVariable Long id) {
         // Dessa forma excluí mesmo o registro do banco de dados
-        repository.deleteById(id);
+//        repository.deleteById(id);
+
+        // Faz exclusão lógico para fica como inativo e não excluir o registro do banco
+        // Recupera o medico no banco de dados
+        var medico = repository.getReferenceById(id);
+
+        // Configura para deixar inativo
+        medico.excluir();
     }
 }
