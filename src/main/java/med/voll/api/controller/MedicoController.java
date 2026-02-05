@@ -33,7 +33,7 @@ public class MedicoController {
         // O Spring gerencia a URI com a classe UriComponentsBuilder
         var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
 
-        return ResponseEntity.created(uri).body();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
 
     }
 
