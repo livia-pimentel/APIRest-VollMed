@@ -23,8 +23,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         var tokenJWT = recuperarToken(request);
 
         if (tokenJWT != null) {
+            // Pega o subject associado ao token
             var subject = tokenService.getSubject(tokenJWT);
-            System.out.println(subject);
+
         }
 
         // Chama o próximo filtro

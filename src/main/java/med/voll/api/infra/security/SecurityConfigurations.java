@@ -2,6 +2,7 @@ package med.voll.api.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +23,10 @@ public class SecurityConfigurations {
         // O token fará a proteção contra ataques csrf
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Desabilita o padrão statefull do login e senha que aparece na pagina
+                .authorizeHttpRequests(req -> {
+                    req.requestMatchers("/login").permitAll(); // Permite o acesso a página de login, as demais ficam bloqueadas até se autenticar
+                    req.anyRequest().authenticated(); // Qualquer outra rota, exceto login, precisa de autenticação
+                })
                 .build();
     }
 
