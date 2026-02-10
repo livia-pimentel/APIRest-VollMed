@@ -27,7 +27,7 @@ public class AgendaDeConsultas {
     private List<ValidadorAgendamentoDeConsulta> validadores;
 
     // Metodos
-    public void agendar(DadosAgendamentoConsulta dados) {
+    public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
 
         // Se não existe o id, interrompe a aplicação
         if (!pacienteRepository.existsById(dados.idPaciente())) {
@@ -46,6 +46,8 @@ public class AgendaDeConsultas {
 
         var consulta = new Consulta(null, medico, paciente, dados.data());
         consultaRepository.save(consulta);
+
+        return new DadosDetalhamentoConsulta(consulta);
     }
 
     private Medico esccolherMedico(DadosAgendamentoConsulta dados) {
