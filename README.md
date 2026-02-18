@@ -21,7 +21,7 @@ O projeto utiliza as melhores práticas do ecossistema Java:
 
 ## 🚀 Funcionalidades
 
-A API fornece um CRUD completo para as seguintes entidades:
+A API fornece um sistema completo de gestão e agendamento:
 
 ### 👨‍⚕️ Médicos
 * **Cadastro:** Validação automática de CRM e especialidade.
@@ -29,11 +29,30 @@ A API fornece um CRUD completo para as seguintes entidades:
 * **Atualização:** Edição de dados específicos (nome, telefone, endereço).
 * **Exclusão Lógica:** Mantém o histórico no banco, mas inativa o registro para a API.
 
-### 👩‍Pacientes
+### 👩‍💼 Pacientes
 * **Cadastro:** Controle de CPF e dados de contato.
 * **Listagem:** Exibição detalhada dos pacientes ativos.
 * **Atualização:** Manutenção de endereços e contatos.
 * **Exclusão:** Sistema de inativação (Soft Delete).
+
+### 📅 Agendamento de Consultas
+* **Agendamento:** Permite marcar consultas escolhendo médico, paciente e data.
+* **Escolha de Médico:** Caso um médico específico não seja escolhido, o sistema seleciona automaticamente um médico disponível da especialidade desejada.
+* **Cancelamento:** Permite o cancelamento de consultas, exigindo a justificativa do motivo (paciente desistiu, médico cancelou, outros).
+
+---
+
+## ⚖️ Regras de Negócio (Agendamento)
+
+O sistema conta com validações rigorosas para garantir a consistência das agendas:
+
+* **Antecedência:** Consultas devem ser agendadas com no mínimo 30 minutos de antecedência.
+* **Horário de Funcionamento:** A clínica atende de segunda a sábado, das 07:00 às 19:00.
+* **Paciente Ativo:** Apenas pacientes ativos no sistema podem agendar consultas.
+* **Médico Ativo:** Apenas médicos ativos podem ter consultas agendadas.
+* **Conflitos de Horário:** O sistema impede que um médico ou paciente tenha duas consultas no mesmo horário.
+* **Limite Diário:** O paciente não pode agendar mais de uma consulta no mesmo dia.
+* **Regra de Cancelamento:** Uma consulta só pode ser cancelada com antecedência mínima de 24 horas.
 
 ---
 
